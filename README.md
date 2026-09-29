@@ -1,3 +1,5 @@
+
+
 <div align="center">
   <p><a href="https://sealeap.cn"><img src="assets/sealeap-logo.png" width="116" alt="SeaLeap" /></a></p>
   <h1>SeaLeap Amazon Skills</h1>
@@ -93,7 +95,7 @@ git clone https://github.com/xjli360/sealeap-amazon-skills.git
 cd sealeap-amazon-skills
 ```
 
-在上方目录中选择一个 Skill，读取它的 `SKILL.md`，或将整个 Skill 目录复制到你的 Agent 所支持的 Skills 目录。保留其中的 `references/`、`agents/` 和 `scripts/`，以便使用配套材料。
+在上方目录中选择一个 Skill，读取它的 `SKILL.md`，或将整个 Skill 目录复制到你的 Agent 所支持的 Skills 目录。保留其中的 `references/`、`agents/` 和 `scripts/`（如存在），以便使用配套材料。
 
 例如：
 
