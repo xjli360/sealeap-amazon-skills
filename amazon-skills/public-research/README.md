@@ -1,8 +1,40 @@
 # 公开资料专题 Skills
 
-本集合包含 **6 个独立 Skill**，核验日期 **2026-09-23**。将公开运营问题与当前官方说明交叉核对后，独立编写任务流程、输入契约和离线计算工具。多来源主题单列，避免把它们归为某一位创作者的方法。
+本集合包含 **12 个独立 Skill**，最近公开资料核验日期 **2026-10-16**；各包保留自己的基线日期。将公开运营问题与当前官方说明交叉核对后，独立编写任务流程、输入契约和离线计算工具。多来源主题单列，避免把它们归为某一位创作者的方法。
 
-## 新增专题
+## 2026-10-16 新增专题
+
+| Skill | 交付重点 |
+|---|---|
+| [官方 Selling Partner 连接与能力核验](sealeap-amazon-selling-partner-connector/SKILL.md) | 核验 Amazon Selling Partner Connector 的账户、权限、实时工具及数据口径，并把销售、补货、Listing 或月结任务路由到可用能力 |
+| [Data Kiosk 一方经营数据对账](sealeap-amazon-data-kiosk-reconciliation/SKILL.md) | 核验 Amazon Data Kiosk 当前 schema、权限和查询成本，规划 Seller Analytics 与经济性数据提取并与同口径后台报表对账 |
+| [亚马逊客服工单跟踪](sealeap-amazon-support-case-tracking/SKILL.md) | 通过已授权 Support API 或用户导出，整理 Amazon 工单状态、往来、附件和回电安排，输出时间线、材料缺口与跟进草稿 |
+| [Seller Central 多渠道经营协同](sealeap-amazon-multichannel-operations/SKILL.md) | 核验 Seller Central 多渠道工具资格，规划 Amazon 与 Shopify、TikTok Shop、Walmart、eBay 的 SKU 映射、共享库存、订单履约和对账 |
+| [Ads Data Manager 第一方数据与受众](sealeap-amazon-first-party-audience/SKILL.md) | 核验 Amazon Ads Data Manager 的数据授权、来源、数据集与投放目标，设计第一方受众接入、质量检查和增量实验 |
+| [Ads MCP Lite 与 AMC 智能分析](sealeap-amazon-ads-mcp-analytics/SKILL.md) | 用实时工具发现核验 Amazon Ads MCP Lite 能力，规划只读广告报表或 AMC 查询并校验粒度、归因和汇总 |
+
+## 2026-10-16 现有内容更新
+
+- [sealeap-amazon-listing-optimizer](../amazon-official/sealeap-amazon-listing-optimizer/SKILL.md)：模块化标题、A+ 与问题分层。
+- [sealeap-taotie-amazon-fba-barcode-and-unit-label-compliance](../bilibili/taotie/sealeap-taotie-amazon-fba-barcode-and-unit-label-compliance/SKILL.md)：FBA 条码与预处理责任。
+- [sealeap-taowu-amazon-supplier-direct-fba-inbound](../youtube/taowu/sealeap-taowu-amazon-supplier-direct-fba-inbound/SKILL.md)：FBA 条码与预处理责任。
+- [sealeap-suanni-amazon-fba-fee-size-tier](../bilibili/suanni/sealeap-suanni-amazon-fba-fee-size-tier/SKILL.md)：旺季履约费与附加费。
+- [sealeap-taotie-amazon-product-unit-economics-ad-affordability](../bilibili/taotie/sealeap-taotie-amazon-product-unit-economics-ad-affordability/SKILL.md)：旺季履约费与附加费。
+- [sealeap-pixiu-amazon-fba-inventory-fees](../douyin/pixiu/sealeap-pixiu-amazon-fba-inventory-fees/SKILL.md)：旺季履约费与附加费。
+- [sealeap-xiezhi-amazon-commodity-bundle-repositioning](../douyin/xiezhi/sealeap-xiezhi-amazon-commodity-bundle-repositioning/SKILL.md)：实体与虚拟捆绑合规。
+- [sealeap-amazon-consumer-electronics-category-growth](../amazon-official/sealeap-amazon-consumer-electronics-category-growth/SKILL.md)：危险品问答与材料。
+- [sealeap-amazon-fba-defective-inventory-triage](../douyin/qilin/sealeap-amazon-fba-defective-inventory-triage/SKILL.md)：退货价值回收与处理费。
+- [sealeap-amazon-full-funnel-growth](../amazon-official/sealeap-amazon-full-funnel-growth/SKILL.md)：Full-Funnel Campaigns 试投与长期指标。
+- [sealeap-taotie-amazon-opportunity-explorer-niche-review](../bilibili/taotie/sealeap-taotie-amazon-opportunity-explorer-niche-review/SKILL.md)：Unmet Demand 与产品定义。
+- [sealeap-amazon-compliant-review-acquisition](../douyin/qilin/sealeap-amazon-compliant-review-acquisition/SKILL.md)：Review Requests 广告准备。
+- [sealeap-amazon-prompts-ad-audit](../public-research/sealeap-amazon-prompts-ad-audit/SKILL.md)：Branded Conversations 准备。
+- [sealeap-amazon-conversational-shopping-discoverability](../douyin/qilin/sealeap-amazon-conversational-shopping-discoverability/SKILL.md)：Branded Conversations 准备。
+- [sealeap-amazon-ad-architecture](../amazon-official/sealeap-amazon-ad-architecture/SKILL.md)：智能诊断与自动优化状态。
+- [sealeap-amazon-acos-diagnostics](../amazon-official/sealeap-amazon-acos-diagnostics/SKILL.md)：智能诊断与自动优化状态。
+
+本轮发布 6 个新增与 16 个现有 Skill 的内容更新。标题校验覆盖模块化字段与未知规则阻断；Review Requests、Branded Conversations 和自动优化按已宣布/未来开放状态处理，危险品公告的日期矛盾保留待核验。账户接口、真实广告/订单/注册写入不在本次内容验证范围。
+
+## 2026-09-23 专题
 
 | Skill | 交付 | 配套 |
 |---|---|---|
@@ -30,7 +62,7 @@
 
 离线计算完成、当前政策核验、账户可用、已提交与前台/结算生效是不同验证层级。新专题未执行真实索赔、广告、注册缴费或达人联络。
 
-## 本轮离线验证
+## 2026-09-23 历史离线验证
 
 - 596 个 Skill 的格式、名称与目录一致性通过。
 - 3,751 个本地 Markdown 文件引用检查通过。

@@ -1,0 +1,4 @@
+interface:
+  display_name: "亚马逊客服工单跟踪"
+  short_description: "核验亚马逊客服工单跟踪的范围、真实能力和业务证据，交付可复核结果与缺口"
+  default_prompt: "使用 $sealeap-amazon-support-case-tracking，根据我的账户范围和现有证据完成任务，明确缺失项及实际验证状态。"

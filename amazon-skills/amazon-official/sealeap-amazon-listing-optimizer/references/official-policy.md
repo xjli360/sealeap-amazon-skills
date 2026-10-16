@@ -1,6 +1,6 @@
 # Amazon Listing 官方基线
 
-核对日期：2026-08-16。以下内容用于静态预审，不是永久规则。每次发布前重新读取目标 marketplace 的 Seller Central 提示、账户通知和 Product Type Definition。
+核对日期：2026-10-16。以下内容用于静态预审，不是永久规则。每次发布前重新读取目标 marketplace 的 Seller Central 提示、账户通知和 Product Type Definition。
 
 ## 目录
 
@@ -29,9 +29,12 @@
 
 ## 标题
 
-Amazon 自 2025-01-21 起对多数类目实施通用要求：
+2026-07-27 起适用的非媒体类目采用模块化标题；实际站点、类目及例外以实时 PTD 和政策为准：
 
-- 不超过 200 个字符（含空格）；
+- `item_name` 最多 75 字符，含空格；
+- `title_differentiation`（Item Highlights）另有最多 125 字符，双方合计最多 200；使用亮点要求标题不超过 75；
+- 亮点用逗号分隔可核验的材质、适用场景、兼容性和规格短语，不重复堆词；
+- 非适用站点或媒体类目不得机械套用该结构，必须取得明确的单字段限制；
 - 除品牌名中的合法用法外，不允许 `! $ ? _ { } ^ ¬ ¦`；
 - 同一单词通常不得出现超过两次，介词、冠词和连词除外。
 
@@ -107,7 +110,8 @@ Manage Your Experiments 当前可测试图片、标题、要点、描述、A+ �
 
 ## 官方来源
 
-- 标题政策：https://sellercentral.amazon.com/seller-forums/discussions/t/533f9cf7-3b5e-4974-b523-02e4a1a42c5f
+- 模块化标题：https://developer-docs.amazon/sp-api/docs/submit-modular-titles
+- 标题政策更新：https://sellercentral.amazon.com/seller-forums/discussions/t/145b6d0f-999c-4555-896c-c694bda2e470
 - 2026 图片基线：https://sellercentral.amazon.com/seller-forums/discussions/t/0149bdb3-2056-42ce-b0bb-9eef94e3d2b8
 - Search Terms：https://sellercentral.amazon.com/seller-forums/discussions/t/923d53dc-a182-4475-a164-6b2500dbaf2d
 - 广告商品详情页建议：https://advertising.amazon.com/en-gb/library/guides/improve-your-products-for-advertising
@@ -118,3 +122,9 @@ Manage Your Experiments 当前可测试图片、标题、要点、描述、A+ �
 - Listings 工作流：https://developer-docs.amazon.com/sp-api/lang-en_EN/docs/building-listings-management-workflows-guide
 - PATCH Validation Preview：https://developer-docs.amazon.com/sp-api/lang-zh_CN/docs/preview-errors-before-partially-updating-a-listing
 - Listings issues：https://developer-docs.amazon.com/sp-api/lang-zh/docs/manage-listings-issues
+
+## API 过渡兼容与目录回读
+
+官方 API 指南同时保留过渡行为：不提交 Item Highlights 时，76–200 字符的 item_name 仍可被接收，Amazon 可能自动拆成目录中的标题与亮点。不能把它写成必然 API 拒绝。getListingsItem/searchListingsItems 返回原提交值，不足以证明目录和前台未被拆分。
+
+新模块化草稿使用 `title_structure=modular`；只有取得目标范围的当前兼容证据时，才可使用 `api_legacy`（无亮点、最多200）并保留警告。媒体/其他单字段例外使用 `single` 和明确限制。三种模式都要记录规则来源/核验日期；不要把兼容接收当作推荐展示或平台合规认证。

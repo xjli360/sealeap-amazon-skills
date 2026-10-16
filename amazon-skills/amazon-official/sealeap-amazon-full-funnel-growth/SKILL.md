@@ -79,3 +79,7 @@ description: Plan and diagnose evidence-based Amazon full-funnel growth across a
 - 零售承接检查与 `GO / HOLD`；
 - 一个单变量实验卡；
 - `DRAFT`、`READY_FOR_REVIEW`、`APPROVED` 或 `HOLD` 状态。
+
+## 2026-10-16 专项更新
+
+处理Full-Funnel Campaigns 试投与长期指标时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。

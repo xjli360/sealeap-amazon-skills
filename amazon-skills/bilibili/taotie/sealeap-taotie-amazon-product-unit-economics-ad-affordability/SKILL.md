@@ -74,3 +74,7 @@ Turn a product candidate into unit economics: pull sourcing quotes by feature co
 - 若有动作：对象、旧值、新值、预期、停止条件、回退值与审批状态。
 
 方案状态使用 `READY FOR REVIEW / DRAFT / HOLD / STOP`；如已执行，另行记录实际结果及回读证据。未得到明确批准时，不得声称已修改线上对象。
+
+## 2026-10-16 专项更新
+
+处理旺季履约费与附加费时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。

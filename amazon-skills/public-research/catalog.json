@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 6,
+  "count": 12,
   "skills": [
     {
       "name": "sealeap-amazon-fba-reimbursement-audit",
@@ -43,6 +43,48 @@
       "description": "合并同一 Amazon Brand Analytics SQP 范围内不重叠的完整周期，重算查询份额与漏斗比率，并比较需求、曝光、点击及购买变化。用于月季度拼接、同比环比和销量下降归因；不直接平均百分比、不混合 Brand/ASIN 视图，也不把缺失查询记零。",
       "path": "sealeap-amazon-sqp-period-reconciliation/SKILL.md",
       "verified_at": "2026-09-23"
+    },
+    {
+      "name": "sealeap-amazon-selling-partner-connector",
+      "title": "官方 Selling Partner 连接与能力核验",
+      "description": "核验 Amazon Selling Partner Connector 的账户、权限、实时工具及数据口径，并把销售、补货、Listing 或月结任务路由到可用能力。用于官方卖家 MCP 接入、连接验收或能力缺失排查；不替代 Amazon Ads API，也不自动发起授权或扩大权限。",
+      "path": "sealeap-amazon-selling-partner-connector/SKILL.md",
+      "verified_at": "2026-10-16"
+    },
+    {
+      "name": "sealeap-amazon-data-kiosk-reconciliation",
+      "title": "Data Kiosk 一方经营数据对账",
+      "description": "核验 Amazon Data Kiosk 当前 schema、权限和查询成本，规划 Seller Analytics 与经济性数据提取并与同口径后台报表对账。用于销售流量退货费用关联、数据缺口或经营口径冲突；不把缺失值补零或把 Vendor 数据作为 Seller 数据。",
+      "path": "sealeap-amazon-data-kiosk-reconciliation/SKILL.md",
+      "verified_at": "2026-10-16"
+    },
+    {
+      "name": "sealeap-amazon-support-case-tracking",
+      "title": "亚马逊客服工单跟踪",
+      "description": "通过已授权 Support API 或用户导出，整理 Amazon 工单状态、往来、附件和回电安排，输出时间线、材料缺口与跟进草稿。用于未解决工单、重复开案和支持处理跟踪；不假设只读 API 能创建或回复工单。",
+      "path": "sealeap-amazon-support-case-tracking/SKILL.md",
+      "verified_at": "2026-10-16"
+    },
+    {
+      "name": "sealeap-amazon-multichannel-operations",
+      "title": "Seller Central 多渠道经营协同",
+      "description": "核验 Seller Central 多渠道工具资格，规划 Amazon 与 Shopify、TikTok Shop、Walmart、eBay 的 SKU 映射、共享库存、订单履约和对账。用于多渠道接入试点与超卖排查；不替代各平台规则或将 MCF 可用等同于全链路同步。",
+      "path": "sealeap-amazon-multichannel-operations/SKILL.md",
+      "verified_at": "2026-10-16"
+    },
+    {
+      "name": "sealeap-amazon-first-party-audience",
+      "title": "Ads Data Manager 第一方数据与受众",
+      "description": "核验 Amazon Ads Data Manager 的数据授权、来源、数据集与投放目标，设计第一方受众接入、质量检查和增量实验。用于 ADM、客户列表或网站事件接入及 AMC 受众应用；不上传未经授权的客户数据，不承诺 ROAS 提升。",
+      "path": "sealeap-amazon-first-party-audience/SKILL.md",
+      "verified_at": "2026-10-16"
+    },
+    {
+      "name": "sealeap-amazon-ads-mcp-analytics",
+      "title": "Ads MCP Lite 与 AMC 智能分析",
+      "description": "用实时工具发现核验 Amazon Ads MCP Lite 能力，规划只读广告报表或 AMC 查询并校验粒度、归因和汇总。用于广告 Agent 接入验收、MCP 动态工具或 AMC Expert 查询审查；不把 Ads 连接当卖家库存利润通道，也不凭生成 SQL 自动改广告。",
+      "path": "sealeap-amazon-ads-mcp-analytics/SKILL.md",
+      "verified_at": "2026-10-16"
     }
   ]
 }

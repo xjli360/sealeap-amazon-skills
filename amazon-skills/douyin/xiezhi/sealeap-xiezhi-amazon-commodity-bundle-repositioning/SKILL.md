@@ -83,3 +83,7 @@ description: "Reposition mature commodity products into differentiated bulk, kit
 结尾列出站点、数据窗口、证据来源、关键假设、缺口、风险、下一步和所有待批准动作。证据不足时写 `HOLD`，不得包装成可直接执行。
 
 执行细节、证据字段和质量检查见 [references/playbook.md](references/playbook.md)。
+
+## 2026-10-16 专项更新
+
+处理实体与虚拟捆绑合规时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。

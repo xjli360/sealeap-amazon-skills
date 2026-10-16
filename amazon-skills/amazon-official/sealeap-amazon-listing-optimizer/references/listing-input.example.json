@@ -42,30 +42,51 @@
     {
       "id": "C1",
       "text": "Blue glazed ceramic hideout for dwarf hamsters, 5 inches",
-      "evidence_ids": ["F1"],
-      "fields": ["title", "bullet_1", "search_terms"]
+      "evidence_ids": [
+        "F1"
+      ],
+      "fields": [
+        "title",
+        "bullet_1",
+        "search_terms"
+      ]
     },
     {
       "id": "C2",
       "text": "Glazed surface wipes clean with a damp cloth",
-      "evidence_ids": ["F2"],
-      "fields": ["bullet_2"]
+      "evidence_ids": [
+        "F2"
+      ],
+      "fields": [
+        "bullet_2"
+      ]
     },
     {
       "id": "C3",
       "text": "Includes one blue hideout only",
-      "evidence_ids": ["F3"],
-      "fields": ["title", "bullet_3"]
+      "evidence_ids": [
+        "F3"
+      ],
+      "fields": [
+        "title",
+        "bullet_3"
+      ]
     }
   ],
   "purchase_questions": [
     {
       "question": "Will it fit the intended animal and habitat?",
-      "answered_in": ["bullet_1", "PT01"]
+      "answered_in": [
+        "bullet_1",
+        "PT01"
+      ]
     },
     {
       "question": "What is included?",
-      "answered_in": ["bullet_3", "PT03"]
+      "answered_in": [
+        "bullet_3",
+        "PT03"
+      ]
     }
   ],
   "images": [
@@ -73,7 +94,11 @@
       "role": "MAIN",
       "width": 2000,
       "height": 2000,
-      "background_rgb": [255, 255, 255],
+      "background_rgb": [
+        255,
+        255,
+        255
+      ],
       "product_fill_percent": 88,
       "contains_text": false,
       "contains_watermark": false,
@@ -84,7 +109,9 @@
       "width": 2000,
       "height": 2000,
       "message": "Verified overall and entrance dimensions",
-      "evidence_ids": ["F1"],
+      "evidence_ids": [
+        "F1"
+      ],
       "mobile_checked": true,
       "alt_text": "Blue ceramic hideout with labeled overall and entrance dimensions"
     },
@@ -93,7 +120,9 @@
       "width": 2000,
       "height": 2000,
       "message": "Care method and glazed surface detail",
-      "evidence_ids": ["F2"],
+      "evidence_ids": [
+        "F2"
+      ],
       "mobile_checked": true,
       "alt_text": "Close view of the blue glazed ceramic surface"
     },
@@ -102,7 +131,9 @@
       "width": 2000,
       "height": 2000,
       "message": "One hideout included; other habitat items not included",
-      "evidence_ids": ["F3"],
+      "evidence_ids": [
+        "F3"
+      ],
       "mobile_checked": true,
       "alt_text": "One blue ceramic hideout shown as the package contents"
     }
@@ -111,7 +142,7 @@
     "live_schema_checked": false,
     "schema_fetched_at": null,
     "schema_checksum": null,
-    "title_max_chars": 200,
+    "title_max_chars": 75,
     "title_forbidden_chars": "!$?_{}^¬¦",
     "bullet_min_count": 3,
     "bullet_max_count": 5,
@@ -119,6 +150,12 @@
     "search_terms_max_bytes": 250,
     "main_image_min_longest_side": 1000,
     "main_image_min_fill_percent": 85,
-    "competitor_terms": []
-  }
+    "competitor_terms": [],
+    "title_structure": "modular",
+    "item_highlights_max_chars": 125,
+    "combined_title_max_chars": 200,
+    "title_policy_source": "https://developer-docs.amazon/sp-api/docs/submit-modular-titles",
+    "title_policy_checked_at": "2026-10-16"
+  },
+  "item_highlights": "Ceramic, 5-inch size, check entrance measurements"
 }

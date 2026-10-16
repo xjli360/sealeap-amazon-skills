@@ -72,3 +72,7 @@ description: Design a policy-compliant Amazon review acquisition plan for high-t
 - 明确拒绝的高风险方案清单。
 
 结尾列出数据窗口、关键假设、证据缺口、风险和下一步；如包含待执行动作，单独放在“待批准变更”中。
+
+## 2026-10-16 专项更新
+
+处理Review Requests 广告准备时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。

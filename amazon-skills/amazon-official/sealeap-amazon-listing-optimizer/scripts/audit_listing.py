@@ -49,7 +49,9 @@ def _latin_words(text: str) -> list[str]:
 
 
 def _visible_words(data: dict[str, Any]) -> set[str]:
-    fields = [str(data.get("title") or ""), str(data.get("description") or "")]
+    fields = [str(data.get("item_name", data.get("title")) or ""),
+              str(data.get("title_differentiation", data.get("item_highlights")) or ""),
+              str(data.get("description") or "")]
     fields.extend(str(x) for x in _as_list(data.get("bullets")))
     return {word for field in fields for word in _latin_words(field)}
 
@@ -72,7 +74,18 @@ def _unknown_ids(values: Iterable[Any], known: set[str]) -> list[str]:
 def audit(data: dict[str, Any]) -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
     rules = data.get("rules") if isinstance(data.get("rules"), dict) else {}
-    title = str(data.get("title") or "").strip()
+    def text_field(native: str, alias: str) -> str:
+        value = data.get(native, data.get(alias, ""))
+        if not isinstance(value, str):
+            checks.append(_check("ERROR", "TITLE_FIELD_INVALID", f"{native}/{alias} must be a string; extract the correct marketplace/language value from API arrays first."))
+            return ""
+        return value
+
+    title = text_field("item_name", "title")
+    highlights = text_field("title_differentiation", "item_highlights")
+    for native, alias in (("item_name", "title"), ("title_differentiation", "item_highlights")):
+        if native in data and alias in data and data[native] != data[alias]:
+            checks.append(_check("ERROR", "TITLE_ALIAS_CONFLICT", f"Conflicting {native} and {alias}; choose one value."))
     bullets = [str(x).strip() for x in _as_list(data.get("bullets"))]
     search_terms = str(data.get("search_terms") or "").strip()
     description = str(data.get("description") or "").strip()
@@ -96,7 +109,53 @@ def audit(data: dict[str, Any]) -> dict[str, Any]:
         if not rules.get("schema_checksum"):
             checks.append(_check("WARN", "SCHEMA_CHECKSUM_MISSING", "Live schema is marked checked but schema_checksum is missing."))
 
-    title_max = _rule_int(rules, "title_max_chars", 200) or 200
+    title_structure = rules.get("title_structure")
+    if title_structure is not None and not isinstance(title_structure, str):
+        checks.append(_check("ERROR", "TITLE_STRUCTURE_INVALID", "title_structure must be modular, single, or api_legacy."))
+        title_structure = None
+    title_policy_known = (
+        title_structure in ("modular", "single", "api_legacy")
+        and bool(str(rules.get("title_policy_source") or "").strip())
+        and bool(str(rules.get("title_policy_checked_at") or "").strip())
+    )
+    if not title_policy_known:
+        checks.append(_check("WARN", "TITLE_POLICY_UNVERIFIED", "Confirm marketplace/product-type title structure, source and check date; no universal 200-character fallback."))
+
+    def title_limit(key: str, default: int | None, cap: int | None = None) -> int | None:
+        value = rules.get(key, default)
+        if value is None and default is None:
+            return None
+        if type(value) is not int or value <= 0:
+            checks.append(_check("ERROR", "TITLE_LIMIT_INVALID", f"{key} must be a positive integer."))
+            return default
+        if cap is not None and value > cap:
+            checks.append(_check("ERROR", "TITLE_LIMIT_EXCEEDS_STRUCTURE", f"{key} cannot exceed {cap} for the selected title structure."))
+            return cap
+        return value
+
+    title_default = {"modular": 75, "api_legacy": 200}.get(title_structure)
+    title_cap = {"modular": 75, "api_legacy": 200}.get(title_structure)
+    title_max = title_limit("title_max_chars", title_default, title_cap)
+    highlights_max = title_limit("item_highlights_max_chars", 125, 125) if title_structure == "modular" else None
+    combined_max = title_limit("combined_title_max_chars", 200, 200) if title_structure == "modular" else None
+    if title_structure == "single" and title_max is None:
+        checks.append(_check("ERROR", "TITLE_LIMIT_MISSING", "Single-field exceptions require an explicit current title limit."))
+    if highlights and title_structure != "modular":
+        checks.append(_check("ERROR", "HIGHLIGHTS_NOT_CONFIRMED", "Item Highlights requires verified modular title support."))
+    if title_structure == "api_legacy":
+        checks.append(_check("WARN", "LEGACY_API_RECONCILIATION", "Documented API compatibility can accept a title up to 200 without Item Highlights; Amazon may split catalog content. Readback of submitted values does not verify final catalog display."))
+    if title_structure == "modular":
+        if len(highlights) > highlights_max:
+            checks.append(_check("ERROR", "ITEM_HIGHLIGHTS_TOO_LONG", f"Item Highlights has {len(highlights)} characters; limit is {highlights_max}."))
+        if len(title) + len(highlights) > combined_max:
+            checks.append(_check("ERROR", "COMBINED_TITLE_TOO_LONG", f"Combined title fields exceed {combined_max} characters."))
+        if any(char in highlights for char in "\r\n"):
+            checks.append(_check("WARN", "ITEM_HIGHLIGHTS_FORMAT", "Use comma-separated comparison phrases, not multiline copy."))
+    if highlights.strip():
+        if highlights.strip().casefold() == title.strip().casefold():
+            checks.append(_check("WARN", "ITEM_HIGHLIGHTS_REDUNDANT", "Item Highlights repeats the title; supply documented differentiating details."))
+        if not any(isinstance(claim, dict) and set(map(str, _as_list(claim.get("fields")))) & {"item_highlights", "title_differentiation"} for claim in claims):
+            checks.append(_check("WARN", "ITEM_HIGHLIGHTS_EVIDENCE_UNMAPPED", "Map Item Highlights claims to verified evidence before release."))
     search_max = _rule_int(rules, "search_terms_max_bytes", 250) or 250
     bullet_min = _rule_int(rules, "bullet_min_count", 3) or 0
     bullet_max = _rule_int(rules, "bullet_max_count", 5)
@@ -105,10 +164,10 @@ def audit(data: dict[str, Any]) -> dict[str, Any]:
     main_min_fill = _rule_int(rules, "main_image_min_fill_percent", 85) or 85
     forbidden = str(rules.get("title_forbidden_chars", DEFAULT_FORBIDDEN_TITLE_CHARS))
 
-    if not title:
+    if not title.strip():
         checks.append(_check("ERROR", "TITLE_MISSING", "Title is empty."))
     else:
-        if len(title) > title_max:
+        if title_max is not None and len(title) > title_max:
             checks.append(_check("ERROR", "TITLE_TOO_LONG", f"Title has {len(title)} characters; configured limit is {title_max}."))
         found = sorted({char for char in title if char in forbidden})
         if found:
@@ -145,7 +204,7 @@ def audit(data: dict[str, Any]) -> dict[str, Any]:
     if visible_overlap:
         checks.append(_check("INFO", "SEARCH_TERMS_VISIBLE_OVERLAP", "Some backend tokens already appear in visible copy; review whether the bytes add value.", visible_overlap))
 
-    combined_copy = " ".join([title, *bullets, description, search_terms])
+    combined_copy = " ".join([title, highlights, *bullets, description, search_terms])
     for code, pattern in RISKY_CLAIM_PATTERNS.items():
         matches = sorted({match.group(0) for match in re.finditer(pattern, combined_copy)})
         if matches:
@@ -264,7 +323,8 @@ def audit(data: dict[str, Any]) -> dict[str, Any]:
         status = "WARN"
     else:
         status = "PASS"
-    release_gate = "HOLD" if severity_counts["ERROR"] or not live_schema_checked else "READY_FOR_REVIEW"
+    schema_recorded = live_schema_checked and bool(rules.get("schema_fetched_at")) and bool(rules.get("schema_checksum"))
+    release_gate = "HOLD" if severity_counts["ERROR"] or not schema_recorded or not title_policy_known else "READY_FOR_REVIEW"
 
     return {
         "status": status,
@@ -281,6 +341,10 @@ def audit(data: dict[str, Any]) -> dict[str, Any]:
         "metrics": {
             "title_chars": len(title),
             "title_limit": title_max,
+            "title_structure": title_structure,
+            "item_highlights_chars": len(highlights),
+            "item_highlights_limit": highlights_max,
+            "combined_title_chars": len(title) + len(highlights),
             "bullet_count": len(bullets),
             "search_terms_bytes": search_bytes,
             "search_terms_limit": search_max,
@@ -325,6 +389,7 @@ def demo_payload() -> dict[str, Any]:
         "product_type": "PET_SUPPLIES",
         "parentage_level": "NONE",
         "title": "Demo Brand Ceramic Hamster Hideout, Blue, 5 Inch",
+        "item_highlights": "Ceramic, check entrance dimensions before purchase",
         "bullets": [
             "Measured 5-inch ceramic hideout for the documented use case",
             "Glazed surface wipes clean with a damp cloth",
@@ -351,7 +416,11 @@ def demo_payload() -> dict[str, Any]:
             "live_schema_checked": True,
             "schema_fetched_at": "DEMO-ONLY",
             "schema_checksum": "DEMO-ONLY",
-            "title_max_chars": 200,
+            "title_structure": "modular",
+            "title_policy_source": "SYNTHETIC demo policy; not live validation",
+            "title_policy_checked_at": "2026-10-16",
+            "title_max_chars": 75,
+            "item_highlights_max_chars": 125,
             "search_terms_max_bytes": 250,
         },
     }

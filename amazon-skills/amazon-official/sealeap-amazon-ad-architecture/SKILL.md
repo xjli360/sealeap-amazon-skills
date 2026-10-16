@@ -78,3 +78,7 @@ description: "Build and diagnose a profit-aware Amazon advertising architecture 
 - 单变量实验、逐项审批、停止条件、回退值和未解决风险。
 
 信息不足时交付取数清单与 `HOLD`，不要为了填满架构而制造 Campaign。
+
+## 2026-10-16 专项更新
+
+处理智能诊断与自动优化状态时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。

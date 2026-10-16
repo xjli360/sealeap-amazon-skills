@@ -6,7 +6,7 @@
   <p>
     <a href="https://sealeap.cn/"><img src="https://img.shields.io/badge/Website-sealeap.cn-0ea5e9?style=for-the-badge" alt="SeaLeap 官网" /></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge" alt="MIT License" /></a>
-    <img src="https://img.shields.io/badge/Skills-596-00a8e1?style=for-the-badge" alt="596 Skills" />
+    <img src="https://img.shields.io/badge/Skills-602-00a8e1?style=for-the-badge" alt="602 Skills" />
     <img src="https://img.shields.io/badge/Free-100%25-22c55e?style=for-the-badge" alt="完全免费" />
     <img src="https://img.shields.io/badge/Status-Continuously_Updated-ff9900?style=for-the-badge" alt="持续更新中" />
     <a href="https://github.com/xjli360/sealeap-amazon-skills/stargazers"><img src="https://img.shields.io/github/stars/xjli360/sealeap-amazon-skills?style=for-the-badge&logo=github" alt="GitHub stars" /></a>
@@ -51,7 +51,7 @@
 
 ## 技能目录
 
-截至 **2026-09-23**，仓库包含 **596 个独立 Skills**：六类内容来源 489 个、公开资料专题 6 个、应用能力集合 101 个。每个 Skill 都使用 `sealeap-...` 名称，并拥有同名安装目录。
+截至 **2026-10-16**，仓库包含 **602 个独立 Skills**：六类内容来源 489 个、公开资料专题 12 个、应用能力集合 101 个。每个 Skill 都使用 `sealeap-...` 名称，并拥有同名安装目录。
 
 | 集合 | Skills | 内容方向 | 入口 |
 |---|---:|---|---|
@@ -61,11 +61,13 @@
 | 小红书公开知识 | 9 | 起步模式、选品、流量、广告与库存运维 | [xiaohongshu](amazon-skills/xiaohongshu/) |
 | B 站公开知识 | 74 | 后台实操、FBA 发货、选品测算、广告与站外引流 | [bilibili](amazon-skills/bilibili/) |
 | YouTube 公开知识 | 49 | 海外卖家 PPC、选品验证、品牌备案与新品启动 | [youtube](amazon-skills/youtube/) |
-| 公开资料专题 | 6 | FBA 赔偿、SP 站外、Prompts、PPWR、创作者合作与 SQP 对账 | [public-research](amazon-skills/public-research/README.md) |
+| 公开资料专题 | 12 | 官方连接、经营数据、工单、多渠道、受众与 AMC，以及赔偿、Prompts、PPWR 等 | [public-research](amazon-skills/public-research/README.md) |
 | 应用能力集合 | 101 | Athena 39、Hermes 10、Apollo 52；按任务组织数据与业务能力 | [Athena](amazon-skills/app/athena/README.md) · [Hermes](amazon-skills/app/hermes/README.md) · [Apollo](amazon-skills/app/apollo/README.md) |
-| **合计** | **596** | **持续更新中** | |
+| **合计** | **602** | **持续更新中** | |
 
 Athena 已将原 227 个细分入口合并为 **38 个业务 Skill + 1 个本地搜索 Skill**；原 226 项业务能力保留在按需读取的参考文件中。旧名称可通过本地搜索定位新入口与具体模式，详见 [Athena 迁移索引](amazon-skills/app/athena/MIGRATION.md)。
+
+**2026-10-16 内容更新**：新增官方卖家连接、Data Kiosk 对账、客服工单、多渠道协同、第一方受众、Ads MCP/AMC 6 个专题；同步修正标题与 FBA 规则，增强费用、捆绑、退货、A+、商机探测及广告新功能准备。未来/beta 能力明确标记，未宣称账户已开通。详见 [更新清单](amazon-skills/public-research/README.md)。
 
 **2026-09-23 内容更新**：新增 6 个专题，并增强变体评论、参考价、购物任务与 AI 创意 4 个现有技能，详见 [本次更新清单](amazon-skills/public-research/README.md)。
 
@@ -128,7 +130,7 @@ sealeap-amazon-skills/
 │   ├── xiaohongshu/       # 9 个 Skills
 │   ├── bilibili/          # 74 个 Skills
 │   ├── youtube/           # 49 个 Skills
-│   ├── public-research/   # 6 个公开资料专题 Skills
+│   ├── public-research/   # 12 个公开资料专题 Skills
 │   └── app/               # 101 个 Skills：Athena 39、Hermes 10、Apollo 52
 ├── assets/                # 项目图片
 ├── README.md

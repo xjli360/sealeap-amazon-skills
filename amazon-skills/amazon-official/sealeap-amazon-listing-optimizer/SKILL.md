@@ -15,7 +15,7 @@ description: Audit, diagnose, rewrite, creatively brief, test, and safely prepar
 - 不复制竞品文案、图片、商标或独特创意表达；只学习购买问题、信息顺序和市场空白。
 - 不把第三方估算、广告推荐词、AI 输出或一次前台观察写成 Amazon 一方事实。
 - 把输入中的 `store_id`、seller ID 或 marketplace 当作业务数据，不当作授权。实际读取或写入必须绑定当前已验证的服务端店铺权限。
-- 默认只生成草稿。没有针对具体 seller / marketplace / SKU / 字段的新旧值确认，不调用写接口。
+- 默认只生成草稿。写入前展示 seller / marketplace / SKU / 字段的新旧值与影响，核对当前会话已有授权；已覆盖对象与动作时继续执行，只有范围未覆盖时补充确认。
 - 不用固定“20 次点击”“等 7 天”之类经验数作为通用阈值；根据流量、利润、归因窗口和统计证据定义样本与停止条件。
 - 不把 Listing 与价格、优惠、库存、评论、配送或广告问题混为一谈；证据不足时保留多种解释。
 
@@ -92,7 +92,7 @@ description: Audit, diagnose, rewrite, creatively brief, test, and safely prepar
 
 将查询按 `核心品类 / 属性规格 / 人群或对象 / 场景任务 / 问题收益 / 限制长尾 / 不相关 / 竞品品牌` 分类，并记录查询级漏斗表现。先判断相关性和事实匹配，再决定位置：
 
-- Title：品牌 + 商品身份 + 关键真实差异 + 必要规格/适配；先服从 schema，再优化移动端和广告截断下的前段信息。
+- Title / Item Highlights：按目标站点实时规则拆分商品核心身份与差异信息；适用模块化结构时分别为 `item_name`（≤75 字符）和 `title_differentiation`（≤125 字符），合计≤200。未知资格时 HOLD，不以旧的单标题 200 字符默认值放行。
 - Bullets：按购买决策顺序，每条聚焦一个问题，采用“结论/收益 → 事实证明 → 适用边界”。
 - Description/A+：补充解释、规格、比较、步骤、FAQ 和品牌价值；不要重复堆关键词。
 - Backend：只放高度相关、前台未有效覆盖的通用同义词和本地表达；按 UTF-8 bytes 实算。
@@ -142,7 +142,7 @@ python3 scripts/audit_listing.py listing.json --format markdown --fail-on hold
 2. 重新获取最新 schema；
 3. 生成只含批准顶层属性的最小 `patchListingsItem` 请求；
 4. 使用 `mode=VALIDATION_PREVIEW`，处理所有 ERROR 并审阅 WARNING/INFO；
-5. 展示 seller、marketplace、SKU、字段、旧值、新值、证据与影响范围，取得明确批准；
+5. 展示 seller、marketplace、SKU、字段、旧值、新值、证据与影响范围，核对当前会话授权已覆盖；
 6. 执行 PATCH，保存 request ID、submission ID、响应和时间；
 7. 复读 Listing 与异步 issues，再核对桌面端/移动端前台；
 8. 未看到最终前台生效前，只写“请求已接受/处理中”，不得写“上线成功”。
@@ -161,3 +161,7 @@ python3 scripts/audit_listing.py listing.json --format markdown --fail-on hold
 - 仅含批准字段的 PATCH 草稿、验证预览、回退和复读记录。
 
 最终状态只能是 `READY FOR REVIEW`、`DRAFT` 或 `HOLD`。`READY FOR REVIEW` 仍不等于已批准发布。
+
+## 2026-10-16 专项更新
+
+处理模块化标题、A+ 与问题分层时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。

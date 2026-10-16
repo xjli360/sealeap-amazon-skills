@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Kiosk 一方经营数据对账"
+  short_description: "核验Data Kiosk 一方经营数据对账的范围、真实能力和业务证据，交付可复核结果与缺口"
+  default_prompt: "使用 $sealeap-amazon-data-kiosk-reconciliation，根据我的账户范围和现有证据完成任务，明确缺失项及实际验证状态。"

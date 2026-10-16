@@ -68,6 +68,13 @@
 - 移动端/广告前段检查：
 - 风险/待确认：
 
+### Item Highlights / title_differentiation
+
+- 单独保留旧值、新值、字符数、事实与关键词映射；不是 bullet points。
+- 记录 `title_structure=modular|single|api_legacy`、规则来源、核对日期和适用范围。模块化标题与亮点分别校验并检查总长度；单字段例外必须提供实时限制。api_legacy 仅用于已核验的无亮点 API 兼容路径，保留可能被平台自动拆分的警告与目录回读要求。
+- 本地输入可用 `title` / `item_highlights`，或 API 原生名 `item_name` / `title_differentiation`；同义字段并存且值不同必须报错。此处均为抽取后的字符串，不接受 API 的 value 数组；先按 marketplace_id/language_tag 选取正确值，不能把整个数组转成字符串。
+- schema、规则范围或结构未知时 HOLD，不自动选用 200 字符。
+
 ### Bullets
 
 逐条给出：

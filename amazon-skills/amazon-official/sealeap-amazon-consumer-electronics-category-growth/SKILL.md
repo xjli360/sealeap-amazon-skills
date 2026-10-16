@@ -53,3 +53,7 @@ description: Research and plan Amazon consumer-electronics category growth acros
 - 物流/售后、利润和库存闸门；
 - 生命周期广告草案与一个实验；
 - `GO / HOLD / REJECT`。
+
+## 2026-10-16 专项更新
+
+处理危险品问答与材料时，先读 [当前专项规则与执行检查](references/update-20261016.md)。其中的未来开放日期和待复核项不能当作当前账户已可用。
